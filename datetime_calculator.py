@@ -39,7 +39,7 @@ def main ():
 
 def mo12():
        #name of the file
-        fileName = "C:\Personal\Ilya\datetime_calculator.csv"
+        fileName = "./datetime_calculator.csv"
        # access mode - Read
         accessMode = 'r'
 
@@ -60,7 +60,7 @@ def mo12():
 def datetime_calculator():
     #defining datetime_calculator ...
      
-        fileName = 'C:\Personal\Ilya\datetime_calculator.csv'
+        fileName = './datetime_calculator.csv'
      #name of the file
 
         accessMode = 'a'
