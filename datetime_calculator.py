@@ -1,4 +1,4 @@
-import datetime
+﻿import datetime
 # to work with date and time
  
 import csv
@@ -6,8 +6,8 @@ import csv
 
 import sys
 
-for arg in sys.argv:
-    print arg
+#for arg in sys.argv:
+   # print arg
 
 array = sys.argv
 
@@ -51,6 +51,10 @@ def mo12():
 
         searchName = array[2] # input("who's birthday are you looking for ? (please enter) :")
 
+        firstName = array[2].split()[0]
+        lastName = array[2].split()[1]
+
+
         with open(fileName, mode = accessMode) as Myfile :
 
         #Read all the contents!
@@ -59,7 +63,7 @@ def mo12():
          for currentRow in dataFromFile :
              #for is used to repeated events
            for currentWord in currentRow :
-               if searchName == currentWord :
+               if firstName == currentWord or lastName == currentWord :
                     print(', '.join(currentRow))
         return
 
