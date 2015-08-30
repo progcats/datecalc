@@ -4,36 +4,42 @@ import datetime
 import csv
 # to work with csv
 
+import sys
+
+for arg in sys.argv:
+    print arg
+
+array = sys.argv
 
 
 def main ():
 #defining main function
-     Cm="y"
+     #Cm="y"
 
-     while Cm == "y"  or Cm == "yes" :
+     #while Cm == "y"  or Cm == "yes" :
          #while is used to reapeat events
 
-        print ("Choose what you want. Enter 1 or 2 or 3:")  
-        ask = input("1 = Search your or someone else's birthday \n2 = Calculate your next birthday \n3 = Exit ") 
-  
-        if ask == '1' :
-           mo12()
-           #press 1 to search your or someone else's birthday
+    #print ("Choose what you want. Enter 1 or 2 or 3:")  
+    ask = array[1] #input("1 = Search your or someone else's birthday \n2 = Calculate your next birthday \n3 = Exit ") 
 
-        elif ask == '2' :
-           datetime_calculator()
-           #press 2 to calculate your next birthday
+    if ask == '1' :
+       mo12()
+       #press 1 to search your or someone else's birthday
 
-        elif ask == '3' :
-            return
-           #press 3 to Exit
+    elif ask == '2' :
+       datetime_calculator()
+       #press 2 to calculate your next birthday
 
-        else:
-            print("That's not on the list!")
+    elif ask == '3' :
+        return
+       #press 3 to Exit
+
+    # else:
+    #     print("That's not on the list!")
         
-        Cm = input('Press y or yes if you want me to calculate again ')
+    #     Cm = input('Press y or yes if you want me to calculate again ')
          
-     return
+    return
         # return is used to exit
 
 
@@ -43,7 +49,7 @@ def mo12():
        # access mode - Read
         accessMode = 'r'
 
-        searchName = input("who's birthday are you looking for ? (please enter) :")
+        searchName = array[2] # input("who's birthday are you looking for ? (please enter) :")
 
         with open(fileName, mode = accessMode) as Myfile :
 
@@ -69,8 +75,8 @@ def datetime_calculator():
         Myfile = open(fileName, mode = accessMode)
         #opening my file....
 
-        firstName = input('What is your first name ? :')
-        lastName = input('What is your last name  ? :')
+        firstName = array[2].split()[0]
+        lastName = array[2].split()[1]
 
         currentDate = datetime.date.today()
         #current date is datetime.date.today
@@ -91,7 +97,7 @@ def datetime_calculator():
 
         #difference  starts at 0
         try :
-            Birthday = input ("When is your birthday? (dd/mm/yyyy) " ) 
+            Birthday = array[3] #input ("When is your birthday? (dd/mm/yyyy) " ) 
         #asking, when is your birthday?
             Birthday = datetime.datetime.strptime(Birthday, '%d/%m/%Y').date()
 
