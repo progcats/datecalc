@@ -51,10 +51,6 @@ def mo12():
 
         searchName = array[2] # input("who's birthday are you looking for ? (please enter) :")
 
-        firstName = array[2].split()[0]
-        lastName = array[2].split()[1]
-
-
         with open(fileName, mode = accessMode) as Myfile :
 
         #Read all the contents!
@@ -63,7 +59,7 @@ def mo12():
          for currentRow in dataFromFile :
              #for is used to repeated events
            for currentWord in currentRow :
-               if firstName == currentWord or lastName == currentWord :
+               if currentWord in searchName :
                     print(', '.join(currentRow))
         return
 
