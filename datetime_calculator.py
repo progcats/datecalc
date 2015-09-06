@@ -1,118 +1,62 @@
-﻿import datetime
-# to work with date and time
- 
-import csv
-# to work with csv
-
-import sys
-
-#for arg in sys.argv:
-   # print arg
-
-array = sys.argv
+﻿import datetime, time, sys, csv
+# to work with date and time   # to work with csv
 
 
-def main ():
-#defining main function
-     #Cm="y"
+class Datecalc:
 
-     #while Cm == "y"  or Cm == "yes" :
-         #while is used to reapeat events
-
-    #print ("Choose what you want. Enter 1 or 2 or 3:")  
-    ask = array[1] #input("1 = Search your or someone else's birthday \n2 = Calculate your next birthday \n3 = Exit ") 
-
-    if ask == '1' :
-       mo12()
-       #press 1 to search your or someone else's birthday
-
-    elif ask == '2' :
-       datetime_calculator()
-       #press 2 to calculate your next birthday
-
-    elif ask == '3' :
-        return
-       #press 3 to Exit
-
-    # else:
-    #     print("That's not on the list!")
-        
-    #     Cm = input('Press y or yes if you want me to calculate again ')
-         
-    return
-        # return is used to exit
-
-
-def mo12():
-       #name of the file
-        fileName = "./datetime_calculator.csv"
-       # access mode - Read
-        accessMode = 'r'
-
-        searchName = array[2] # input("who's birthday are you looking for ? (please enter) :")
+    def mo12(self, full_name):
+       
+        fileName = "./datetime_calculator.csv" #name of the file
+        accessMode = 'r' # access mode - Read
 
         with open(fileName, mode = accessMode) as Myfile :
 
-        #Read all the contents!
-         dataFromFile = csv.reader(Myfile, delimiter=",")
+            #Read all the contents!
+            dataFromFile = csv.reader(Myfile, delimiter=",")
 
-         for currentRow in dataFromFile :
-             #for is used to repeated events
-           for currentWord in currentRow :
-               if currentWord in searchName :
-                    print(', '.join(currentRow))
-        return
+            for currentRow in dataFromFile :
+                 #for is used to repeated events
+                for currentWord in currentRow :
+                    if currentWord in full_name :
+                         return ', '.join(currentRow)
 
-def datetime_calculator():
-    #defining datetime_calculator ...
+    def datetime_calculator(self, full_name, birth_date):
+        #defining datetime_calculator ...
      
-        fileName = './datetime_calculator.csv'
-     #name of the file
+        fileName = './datetime_calculator.csv' #name of the file
 
-        accessMode = 'a'
-        #accessMode = append
+        accessMode = 'a' #accessMode = append
 
         Myfile = open(fileName, mode = accessMode)
         #opening my file....
 
-        firstName = array[2].split()[0]
-        lastName = array[2].split()[1]
+        firstName = full_name.split()[0] #TODO: use dicionary
+        lastName = full_name.split()[1]
 
-        currentDate = datetime.date.today()
+        currentDate = str(time.strftime("%d-%m-%Y"))
         #current date is datetime.date.today
         
         print ("Today is: " + str(currentDate))
-
-            #print (currentDate.year)
-        #print ('today is '+ str(currentDate.year))
-        #print (format_date(currentDate, format='full', locale='ru_Ru'))
-        #print (format_date(currentDate, format='full', locale='en'))
-        #print (format_date(currentDate, format='full', locale='De'))
-
-        #strftime allows you to specigy the date format
-        #print ('Today is: '+ currentDate.strftime('%d %A of %B,%Y'))
-
 
         difference  = 0
 
         #difference  starts at 0
         try :
-            Birthday = array[3] #input ("When is your birthday? (dd/mm/yyyy) " ) 
+            Birthday = birth_date #input ("When is your birthday? (dd/mm/yyyy) " ) 
         #asking, when is your birthday?
+            
             Birthday = datetime.datetime.strptime(Birthday, '%d/%m/%Y').date()
 
-        
             NextBirthday = Birthday.replace(year = currentDate.year)
         #replacing year to the current year
-        
-        
-            difference  = NextBirthday - currentDate
 
+            difference  = NextBirthday - currentDate
 
             if difference.days  < 0 :
                print ('\nYour birthday was ' + str(abs(difference.days)) + ' days ago') 
             else :
                print('\nThere are  ' + str(difference.days) + ' days left until your next birthday \n ')
+        
         except:
             print('Birthday written incorectly.Try again :(')
           #if the try does not work,then the except will work 
@@ -124,6 +68,20 @@ def datetime_calculator():
         return
 
 
+if __name__ == '__main__':
 
-#finally do this!
-main()
+    calc = Datecalc() # instantiating an object
+
+    ask = sys.argv[1] #input("1 = Search your or someone else's birthday \n2 = Calculate your next birthday \n3 = Exit ") 
+
+    FULL_NAME = sys.argv[2]
+
+    if ask == '1' :  #press 1 to search your or someone else's birthday
+       print calc.mo12(FULL_NAME)
+      
+    elif ask == '2' : #press 2 to calculate your next birthday
+       BIRTH_DATE = sys.argv[3]
+       calc.datetime_calculator(FULL_NAME, BIRTH_DATE)
+       
+    elif ask == '3' :
+        pass
