@@ -4,7 +4,7 @@ from datetime_calculator import Datecalc
 calc = Datecalc()
 
 urls = (
-    '/', 'index'
+    '/', 'index', 'test'
 )
 
 
