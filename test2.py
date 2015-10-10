@@ -1,1 +1,2 @@
 #bla
+print 'hello world'
