@@ -4,18 +4,15 @@ from datetime_calculator import Datecalc
 calc = Datecalc()
 
 urls = (
-    '/', 'index', 'test'
+    '/(.*)', 'index'
 )
 
 
 class index:
-    def GET(self):
-        return calc.mo12('ilya')
+    def GET(self, name):
+    	print name
+        return calc.mo12(name)
 
-
-class test:
-    def GET(self):
-        return calc.mo12('Lisa')
 
 
 if __name__ == "__main__":
